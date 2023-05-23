@@ -2,7 +2,7 @@ package ind.gopinnath.junitdemo.controller;
 
 import ind.gopinnath.junitdemo.model.Employee;
 import ind.gopinnath.junitdemo.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +15,10 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class EmployeeResource {
 
-    @Autowired
-    private EmployeeService service;
+    private final EmployeeService service;
 
     @GetMapping("/employees/{id}")
     public Employee getEmployeeById(@PathVariable long id) {
@@ -28,7 +28,7 @@ public class EmployeeResource {
     @PostMapping("/employees")
     public ResponseEntity createEmployee(@RequestBody Employee employee) {
         return ResponseEntity
-                .created(URI.create("/api/employees/" + service.createEmployee(employee)))
+                .created(URI.create("http://localhost:8080/api/employees/" + service.createEmployee(employee)))
                 .build();
     }
 }

@@ -3,22 +3,18 @@ package ind.gopinnath.junitdemo.service;
 import ind.gopinnath.junitdemo.entity.EmployeeEntity;
 import ind.gopinnath.junitdemo.model.Employee;
 import ind.gopinnath.junitdemo.repository.EmployeeRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class EmployeeService {
-
-    @Autowired
-    private EmployeeRepository repository;
-
-    @Autowired
-    private EmployeeMapper mapper;
-
+    private final EmployeeRepository repository;
+    private final EmployeeMapper mapper;
     public Employee getEmployeeById(long id) {
         Optional<EmployeeEntity> entity = repository.findById(id);
         return entity
